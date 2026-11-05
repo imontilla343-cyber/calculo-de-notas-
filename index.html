@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotaMatic - Cálculo de Notas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para Iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="p-3 md:p-6 min-h-screen text-slate-800">
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="max-w-7xl mx-auto bg-white rounded-3xl border-4 border-sky-400 p-4 md:p-6 shadow-2xl relative overflow-hidden">
+        
+        <!-- BANNER DE TÍTULO SUPERIOR (3 Parte) -->
+        <div class="text-center mb-6 border-b-2 border-dashed border-sky-200 pb-3">
+            <span class="text-xs md:text-sm font-extrabold text-sky-600 bg-sky-100 px-4 py-1 rounded-full uppercase tracking-wider">
+                3 Parte
+            </span>
+            <h1 class="text-xl md:text-3xl font-extrabold text-slate-700 mt-1 heading-font">
+                Creación del frontend: <span class="text-sky-600">"Dale vida a tu interfaz"</span>
+            </h1>
+        </div>
+
+        <!-- HEADER PRINCIPAL NOTAMATIC -->
+        <div class="bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 text-white rounded-2xl p-4 md:p-5 mb-6 shadow-md flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3 md:gap-4">
+                <!-- LOGO INSTITUCIONAL LPC -->
+                <div class="w-14 h-14 md:w-16 md:h-16 bg-white rounded-full p-1 shadow-lg flex items-center justify-center shrink-0 border-2 border-yellow-400">
+                    <div class="w-full h-full rounded-full border-2 border-blue-800 flex flex-col items-center justify-center text-blue-900 font-black text-[9px] text-center leading-tight">
+                        <i class="fas fa-graduation-cap text-yellow-500 text-lg"></i>
+                        <span>LPC</span>
+                    </div>
+                </div>
+                <!-- NOMBRE DE LA APP -->
+                <div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-calculator text-yellow-300 text-2xl md:text-3xl"></i>
+                        <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight heading-font text-yellow-300">
+                            NotaMatic
+                        </h2>
+                    </div>
+                    <p class="text-xs md:text-sm font-semibold text-sky-100 italic">
+                        ¡Calcula y controla tu promedio!
+                    </p>
+                </div>
+            </div>
+
+            <!-- SLOGAN & INSIGNIA -->
+            <div class="flex flex-col md:items-end w-full md:w-auto">
+                <span class="text-sm md:text-base font-bold text-yellow-200 bg-blue-700/50 px-3 py-1 rounded-lg border border-blue-400/30">
+                    La educación también está en tu mundo
+                </span>
+                <span class="mt-2 text-xs font-bold bg-white text-blue-700 px-3 py-1 rounded-full shadow-inner inline-flex items-center gap-1.5 self-start md:self-end">
+                    <i class="fas fa-bookmark text-amber-500"></i> Grado 11° / Cálculo
+                </span>
+            </div>
+        </div>
+
+        <!-- GRID DE 3 PANELES PRINCIPALES -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mb-6">
+            
+            <!-- PANEL 1: AGREGAR EVALUACIÓN (FORMULARIO) -->
+            <div class="lg:col-span-4 bg-slate-50 border-2 border-sky-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="bg-sky-500 text-white font-bold py-2 px-3 rounded-xl mb-4 flex items-center gap-2 shadow">
+                        <i class="fas fa-file-signature"></i>
+                        <span class="heading-font text-base" id="tituloFormulario">Agregar evaluación</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nombre del ejercicio / examen:</label>
+                            <input type="text" id="notaNombre" placeholder="Ej. Parcial 1 / Taller Límites" 
+                                class="w-full border-2 border-slate-300 rounded-xl px-3 py-2 text-sm focus:border-sky-500 focus:outline-none transition">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nota (0.0 - 5.0):</label>
+                                <input type="number" id="notaValor" min="0" max="5" step="0.1" placeholder="4.5"
+                                    class="w-full border-2 border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 focus:border-sky-500 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Porcentaje (%):</label>
+                                <input type="number" id="notaPeso" min="1" max="100" placeholder="20"
+                                    class="w-full border-2 border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 focus:border-sky-500 focus:outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 space-y-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="calcularTemp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-2 px-3 rounded-xl text-sm transition shadow flex items-center justify-center gap-1.5 active:scale-95">
+                            <i class="fas fa-calculator"></i> Calcular
+                        </button>
+                        <button onclick="guardarNota()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2 px-3 rounded-xl text-sm transition shadow flex items-center justify-center gap-1.5 active:scale-95" id="btnGuardar">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                    </div>
+                    <button onclick="limpiarFormulario()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-eraser"></i> Limpiar formulario
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANEL 2: RESULTADO Y FÓRMULA -->
+            <div class="lg:col-span-4 bg-slate-50 border-2 border-emerald-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="bg-emerald-500 text-white font-bold py-2 px-3 rounded-xl mb-3 flex items-center gap-2 shadow">
+                        <i class="fas fa-chart-pie"></i>
+                        <span class="heading-font text-base">Resultado</span>
+                    </div>
+
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-3">
+                        <div class="text-xs font-bold text-emerald-800 mb-1">Fórmula:</div>
+                        <div class="text-center font-bold text-slate-800 text-sm bg-white py-2 rounded-lg border border-emerald-100 shadow-inner">
+                            Promedio = Σ (Nota × Peso%)
+                        </div>
+                        <div class="text-[11px] text-emerald-700 mt-1 font-medium">
+                            • <b>Nota</b> = Calificación obtenida (0.0 - 5.0)<br>
+                            • <b>Peso</b> = Porcentaje asignado a la nota
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 border border-pink-200 rounded-xl p-3 text-xs">
+                        <div class="font-bold text-pink-800 mb-1">Procedimiento:</div>
+                        <div id="procedimientoContainer" class="space-y-1 font-mono text-slate-700 max-h-24 overflow-y-auto">
+                            <em>Agrega o calcula una nota para ver el detalle.</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-emerald-100 border-2 border-emerald-400 rounded-2xl p-3 text-center shadow-inner">
+                    <div class="text-xs font-black uppercase text-emerald-800 tracking-wider">Promedio Acumulado:</div>
+                    <div id="promedioFinalDisplay" class="text-3xl md:text-4xl font-black text-emerald-700 heading-font my-1">
+                        0.0 / 5.0
+                    </div>
+                    <div id="estadoBadging" class="inline-block px-3 py-0.5 text-xs font-bold rounded-full bg-slate-200 text-slate-600">
+                        Sin notas
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 3: LISTA DE NOTAS -->
+            <div class="lg:col-span-4 bg-slate-50 border-2 border-indigo-200 rounded-2xl p-4 flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="bg-indigo-600 text-white font-bold py-2 px-3 rounded-xl mb-3 flex items-center gap-2 shadow">
+                        <i class="fas fa-list-ol"></i>
+                        <span class="heading-font text-base">Lista de notas</span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white max-h-48 overflow-y-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200 sticky top-0">
+                                <tr>
+                                    <th class="p-2">#</th>
+                                    <th class="p-2">Nombre</th>
+                                    <th class="p-2 text-center">Nota</th>
+                                    <th class="p-2 text-center">Peso</th>
+                                    <th class="p-2 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaNotasBody" class="divide-y divide-slate-100">
+                                <!-- Filas dinámicas generadas por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-start gap-2.5">
+                    <div class="text-amber-500 text-lg shrink-0 mt-0.5">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="text-[11px] text-slate-600 leading-snug">
+                        <strong class="text-sky-800">Recuerda:</strong> El promedio mínimo de aprobación es <strong>3.0</strong>. La suma de tus porcentajes no debe superar el <strong>100%</strong>.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BARRA DE ACCIONES INFERIOR -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button onclick="guardarNota()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3 px-4 rounded-2xl text-sm transition shadow-lg flex items-center justify-center gap-2 active:scale-95 border-b-4 border-emerald-700">
+                <i class="fas fa-plus-circle text-lg"></i>
+                <span>Agregar Nota</span>
+            </button>
+
+            <button onclick="prepararModificar()" class="bg-amber-500 hover:bg-amber-600 text-white font-extrabold py-3 px-4 rounded-2xl text-sm transition shadow-lg flex items-center justify-center gap-2 active:scale-95 border-b-4 border-amber-700">
+                <i class="fas fa-edit text-lg"></i>
+                <span>Modificar</span>
+            </button>
+
+            <button onclick="vaciarTodas()" class="bg-red-500 hover:bg-red-600 text-white font-extrabold py-3 px-4 rounded-2xl text-sm transition shadow-lg flex items-center justify-center gap-2 active:scale-95 border-b-4 border-red-700">
+                <i class="fas fa-trash-alt text-lg"></i>
+                <span>Eliminar Todo</span>
+            </button>
+
+            <button onclick="consultarResumen()" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3 px-4 rounded-2xl text-sm transition shadow-lg flex items-center justify-center gap-2 active:scale-95 border-b-4 border-purple-800">
+                <i class="fas fa-sync-alt text-lg"></i>
+                <span>Consultar</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Enlace al archivo de JavaScript separado -->
+    <script src="script.js"></script>
+</body>
+</html>
